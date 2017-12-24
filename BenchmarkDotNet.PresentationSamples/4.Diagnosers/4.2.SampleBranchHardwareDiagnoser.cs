@@ -5,13 +5,14 @@ using System;
 namespace BenchmarkDotNet.PresentationSamples
 {
 	[HardwareCounters(HardwareCounter.BranchMispredictions, HardwareCounter.BranchInstructions)]
-	public class SampleHardwareDiagnoser
+	public class SampleBranchHardwareDiagnoser
 	{
 		private const int length = 100_000;
 		private int[] sorted = new int[length];
 		private int[] unsorted = new int[length];
 
-		public SampleHardwareDiagnoser()
+		[GlobalSetup]
+		public void GlobalSetup()
 		{
 			var random = new Random();
 			for (int i = 0; i < length; i++)

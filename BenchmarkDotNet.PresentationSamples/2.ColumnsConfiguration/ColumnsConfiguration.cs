@@ -8,6 +8,8 @@ namespace BenchmarkDotNet.PresentationSamples
 {
 	public class ColumnsConfiguration
 	{
+		private static Random random = new Random();
+
 		private class Config : ManualConfig
 		{
 			public Config()
@@ -45,8 +47,6 @@ namespace BenchmarkDotNet.PresentationSamples
 		{
 			Sleep(timeoutMs: 100, absoluteErrorMs: 90);
 		}
-
-		private static Random random = new Random();
 
 		private static void Sleep(int timeoutMs, int absoluteErrorMs)
 		{
