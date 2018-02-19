@@ -4,23 +4,26 @@ using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Jobs;
 using System.Threading;
 
-namespace BenchmarkDotNet.PresentationSamples
+namespace BenchmarkDotNet.PresentationSamples.Run
 {
+	public class Config : ManualConfig
+	{
+		public Config()
+		{
+			Add(Job.Default
+				.With(RunStrategy.Monitoring)
+				.WithLaunchCount(2)
+				.WithWarmupCount(4)
+				.WithTargetCount(10));
+
+			Add(Job.Default.With(RunStrategy.ColdStart));
+			Add(Job.Default.With(RunStrategy.Throughput));
+		}
+	}
+
 	[Config(typeof(Config))]
 	public class RunConfiguration
 	{
-		private class Config : ManualConfig
-		{
-			public Config()
-			{
-				Add(Job.Default
-					.With(RunStrategy.Monitoring)
-					.WithLaunchCount(2)
-					.WithWarmupCount(4)
-					.WithTargetCount(10));
-			}
-		}
-
 		private FakeCalculator calculator = new FakeCalculator();
 
 		[Benchmark]

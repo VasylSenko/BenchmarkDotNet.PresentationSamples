@@ -7,15 +7,14 @@ namespace BenchmarkDotNet.PresentationSamples
 	[HardwareCounters(HardwareCounter.BranchMispredictions, HardwareCounter.BranchInstructions)]
 	public class SampleBranchHardwareDiagnoser
 	{
-		private const int length = 100_000;
-		private int[] sorted = new int[length];
-		private int[] unsorted = new int[length];
+		private int[] sorted = new int[100_000];
+		private int[] unsorted = new int[100_000];
 
 		[GlobalSetup]
 		public void GlobalSetup()
 		{
 			var random = new Random();
-			for (int i = 0; i < length; i++)
+			for (int i = 0; i < sorted.Length; i++)
 			{
 				sorted[i] = unsorted[i] = random.Next(256);
 			}

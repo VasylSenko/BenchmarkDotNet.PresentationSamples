@@ -1,23 +1,26 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Horology;
 using BenchmarkDotNet.Jobs;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BenchmarkDotNet.PresentationSamples
+namespace BenchmarkDotNet.PresentationSamples.Accuracy
 {
+	public class Config : ManualConfig
+	{
+		public Config()
+		{
+			Add(Job.Default
+				.WithMinInvokeCount(2048)
+				.WithEvaluateOverhead(true)
+				.WithRemoveOutliers(true)
+				.WithMaxRelativeError(0.01));
+		}
+	}
+
 	[Config(typeof(Config))]
 	public class AccuracyConfiguration
 	{
-		private class Config : ManualConfig
-		{
-			public Config()
-			{
-				Add(Job.Default.WithMinIterationTime(TimeInterval.FromSeconds(1)));
-			}
-		}
-
 		private List<int> list;
 		private HashSet<int> hashset;
 
