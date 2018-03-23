@@ -13,6 +13,12 @@ namespace BenchmarkDotNet.PresentationSamples
 		public object ObjectWithIntProp() => new { IntProp = 1 };
 
 		[Benchmark]
+		public object ObjectWith2IntProps() => new { IntProp = 1, IntProp2 = 1 };
+
+		[Benchmark]
+		public object ObjectWith3IntProps() => new { IntProp = 1, IntProp2 = 1, IntProp3 = 1 };
+
+		[Benchmark]
 		public byte[] EmptyByteArray() => Array.Empty<byte>();
 
 		[Benchmark]
